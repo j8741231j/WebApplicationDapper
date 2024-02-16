@@ -2,7 +2,6 @@
 using System.Data;
 using Npgsql;
 using WebApplicationDapper.Models;
-using Dapper.Contrib.Extensions;
 
 namespace WebApplicationDapper.Repositories
 {
@@ -13,31 +12,31 @@ namespace WebApplicationDapper.Repositories
         public IEnumerable<Product> GetAllProducts()
         {
             using IDbConnection db = new NpgsqlConnection(ConnectionString);
-            return db.GetAll<Product>();
+            return db.Query<Product>("SELECT * FROM Product");
         }
 
         public Product GetProductById(int id)
         {
             using IDbConnection db = new NpgsqlConnection(ConnectionString);
-            return db.Get<Product>(id);
+            return db.QueryFirstOrDefault<Product>("SELECT * FROM \"Product\" WHERE \"Id\" = @Id", new { Id = id });
         }
 
         public void InsertProduct(Product product)
         {
             using IDbConnection db = new NpgsqlConnection(ConnectionString);
-            db.Insert(product);
+            db.Execute("INSERT INTO \"Product\" (\"Name\", \"Price\") VALUES (@Name, @Price)", product);
         }
 
         public void UpdateProduct(Product product)
         {
             using IDbConnection db = new NpgsqlConnection(ConnectionString);
-            db.Update(product);
+            db.Execute("UPDATE \"Product\" SET \"Name\" = @Name, \"Price\" = @Price WHERE \"Id\" = @Id", product);
         }
 
         public void DeleteProduct(int id)
         {
             using IDbConnection db = new NpgsqlConnection(ConnectionString);
-            db.Delete(new Product { Id = id });
+            db.Execute("DELETE FROM \"Product\" WHERE \"Id\" = @Id", new { Id = id });
         }
     }
 }

@@ -1,9 +1,6 @@
-using Dapper.FluentMap;
 using WebApplicationDapper.Services;
 
-
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 // Add Service and Repository
@@ -31,5 +28,4 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 app.Run();

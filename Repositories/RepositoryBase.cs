@@ -1,4 +1,6 @@
-﻿namespace WebApplicationDapper.Repositories
+﻿using Dapper;
+
+namespace WebApplicationDapper.Repositories
 {
     public abstract class RepositoryBase<T>
     {
@@ -6,7 +8,7 @@
 
         protected RepositoryBase(IConfiguration config)
         {
-            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = false;
+            DefaultTypeMap.MatchNamesWithUnderscores = true;
             ConnectionString = config.GetConnectionString("DefaultConnection");
         }
     }
