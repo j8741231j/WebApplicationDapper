@@ -2,6 +2,7 @@
 using System.Data;
 using Npgsql;
 using WebApplicationDapper.Models;
+using Dapper.Contrib.Extensions;
 
 namespace WebApplicationDapper.Repositories
 {
@@ -12,7 +13,8 @@ namespace WebApplicationDapper.Repositories
         public IEnumerable<Product> GetAllProducts()
         {
             using IDbConnection db = new NpgsqlConnection(ConnectionString);
-            return db.Query<Product>("SELECT * FROM Product");
+            //return db.Query<Product>("SELECT * FROM Product");
+            return db.GetAll<Product>();
         }
 
         public Product GetProductById(int id)

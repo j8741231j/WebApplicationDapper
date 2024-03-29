@@ -1,7 +1,11 @@
-﻿namespace WebApplicationDapper.Models
+﻿using Dapper.Contrib.Extensions;
+
+namespace WebApplicationDapper.Models
 {
+    [Table("Product")]
     public class Product
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }

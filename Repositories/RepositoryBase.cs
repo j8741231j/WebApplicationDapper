@@ -8,7 +8,8 @@ namespace WebApplicationDapper.Repositories
 
         protected RepositoryBase(IConfiguration config)
         {
-            DefaultTypeMap.MatchNamesWithUnderscores = true;
+            //DefaultTypeMap.MatchNamesWithUnderscores = true;
+            DefaultTypeMap.MatchNamesWithUnderscores = false;
             ConnectionString = config.GetConnectionString("DefaultConnection");
         }
     }
